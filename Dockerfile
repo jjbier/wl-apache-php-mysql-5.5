@@ -24,11 +24,8 @@ RUN php5enmod mcrypt
 # Add image configuration and scripts
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
-
-# Configure /htdocs folder
-RUN mkdir -p /htdocs && rm -fr /var/www/html && ln -s /htdocs /var/www/html
-
+RUN usermod -u 1000 www-data
 
 EXPOSE 80
-WORKDIR /htdocs
+WORKDIR /var/www/html
 CMD ["/run.sh"]
