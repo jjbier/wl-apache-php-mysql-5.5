@@ -25,8 +25,10 @@ RUN php5enmod mcrypt
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 
-VOLUME [ "/var/www/html" ]
+# Configure /htdocs folder
+RUN mkdir -p /htdocs && rm -fr /var/www/html && ln -s /htdocs /var/www/html
+
 
 EXPOSE 80
-WORKDIR /var/www/html
+WORKDIR /htdocs
 CMD ["/run.sh"]
